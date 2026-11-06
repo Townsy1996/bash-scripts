@@ -1,0 +1,20 @@
+2026-11-06 09:00:01 INFO Application started
+2026-11-06 09:00:02 INFO Loading configuration
+2026-11-06 09:00:04 INFO Connected to database
+2026-11-06 09:01:15 WARN Slow query detected (1.8s)
+2026-11-06 09:02:30 INFO User login: alice
+2026-11-06 09:03:12 ERROR Failed to send email to alice
+2026-11-06 09:04:45 INFO User login: bob
+2026-11-06 09:06:10 WARN Cache miss rate above 40%
+2026-11-06 09:07:22 INFO Request GET /games 200
+2026-11-06 09:08:50 ERROR Database connection timeout
+2026-11-06 09:08:55 INFO Retrying database connection
+2026-11-06 09:09:03 INFO Database connection restored
+2026-11-06 09:12:40 WARN Disk usage at 85%
+2026-11-06 09:14:18 INFO Request POST /reviews 201
+2026-11-06 09:15:33 ERROR Invalid JWT token for user bob
+2026-11-06 09:17:02 INFO Request GET /games/7 404
+2026-11-06 09:18:41 ERROR Unhandled exception in review handler
+2026-11-06 09:20:09 WARN Slow query detected (2.3s)
+2026-11-06 09:21:55 INFO User logout: alice
+2026-11-06 09:23:47 ERROR Failed to write backup file
