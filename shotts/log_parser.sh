@@ -10,6 +10,8 @@ if [ ! -f "$1" ]; then
     exit 1
 fi
 
-error_count="$(grep -c "ERROR" "$1")"
+for level in ERROR WARN INFO; do
+    count="$(grep -c "$level" "$1")"
+    echo "There are $count $level instances detected in this log file"
+done
 
-echo "There are $error_count errors detected in this log file" 

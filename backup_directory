@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# This script will take in two parameters, source dir and destination dir
+# It will produce a timestamped and compressed archive of the source folder in the destination folder
+# Script will also delete backups older than 7 days
+
+TIMESTAMP="$(date '+%Y-%m-%d-%H-%M-%S')"
+PATH_VAR="$2/backup_$TIMESTAMP.tar.gz"
+
+# Check if both arguments are given 
+if [ $# -ne 2 ]; then
+    echo "Error: Expected 2 arguments, ./backup_directory <source_dir> <destination_dir>" >&2
+    exit 1
+fi
+
+
+# Directory checks 
+if [ ! -d "$1" ]; then
+    echo "Error: Source must be a directory ./backup_directory <source_dir> <destination_dir>" >&2
+    exit 1 
+fi
+
+if [ ! -d "$2" ]; then 
+    echo "Error: Destination must be a directory ./backup_directory <source_dir> <destination_dir>" >&2
+    exit 1
+fi
+
+PARENT="$(dirname "$1")"
+NAME="$(basename "$1")"
+
+tar -czf "$PATH_VAR" -C "$PARENT" "$NAME"
