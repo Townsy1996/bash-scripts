@@ -28,4 +28,13 @@ fi
 PARENT="$(dirname "$1")"
 NAME="$(basename "$1")"
 
-tar -czf "$PATH_VAR" -C "$PARENT" "$NAME"
+if tar -czf "$PATH_VAR" -C "$PARENT" "$NAME"; then
+    echo "Success: Directory has been archived, path is: $PATH_VAR"
+
+else 
+    echo "Error: Directory has not been archived" >&2
+    exit 1
+fi
+
+find "$2" -maxdepth 1 -type f -name "backup_*.tar.gz" -mtime +7 -delete
+echo "Old backups (older than 7 days) removed"
