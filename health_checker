@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# This script takes a URL as parameter and reports whether a web address responds
+# Exits 0 if healthy, 1 if not
+
+if [ "$#" -ne 1 ]; then
+    echo "Error: Expected 1 argument ./health_checker <URL>" >&2
+    exit 1
+fi
+
+
+CHECK_CODE=$(curl -s -o /dev/null -w "%{http_code}" -m 15 "$1")
+
+
+if [ "$CHECK_CODE" -ge 200 ] && [ "$CHECK_CODE" -lt 300 ]; then
+    echo "Success: Site is receiving traffic. Site returned $CHECK_CODE"
+    exit 0
+
+else 
+    echo "Error: Site is not receiving traffic. Site returned $CHECK_CODE" >&2
+    exit 1
+
+fi
+
+
