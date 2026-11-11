@@ -1,0 +1,53 @@
+#!/bin/bash
+
+# This script will take two parameters; <environment> and <tag> and will then PRINT what it will deploy
+# Env will only be dev, test or prod, tag will also have own validation
+
+ENVIRONMENT="$1"
+TAG="$2"
+
+# Validate correct number of arguments provided
+
+if [ $# -ne 2 ]; then
+    echo "Error: Expected 2 arguments. Usage: ./deploy <environment> <tag>" >&2
+    exit 1
+fi
+
+# Environment validation check
+
+case "$ENVIRONMENT" in
+
+    "dev" | "test" | "prod")
+        echo "Valid environment"
+        ;;
+    *)
+        echo "Error: Invalid Environment; dev, test or prod only" >&2
+        exit 1
+        ;;
+esac
+
+# Tag validation check
+
+PATTERN="^v[0-9]+\.[0-9]+\.[0-9]+$"
+if [[ "$TAG" =~ $PATTERN ]]; then
+    echo "Tag okay"
+
+else 
+    echo "Tag does not match pattern for example, v1.2.3" >&2
+    exit 1
+fi
+
+# Final prod confirmation check
+
+if [ "$ENVIRONMENT" = "prod" ]; then
+    read -r -p "Continue with prod deployment? Type yes to proceed: " REPLY_VAR
+        if [ ! "$REPLY_VAR" = "yes" ]; then
+            echo "Deployment cancelled"
+            exit 1
+        fi
+fi
+
+
+echo "Deploying $TAG in $ENVIRONMENT"
+
+
