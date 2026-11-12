@@ -1,0 +1,9 @@
+This is a simple repo where I have been practicing making Bash scripts for later use.
+
+They are:
+
+1) Directory backup script: creates a timestamped tar.gz archive of a directory and deletes backups older than 7 days
+2) Health check script: checks url, exits 0 when 2xx response and 1 otherwise
+3) Deploy script: Input an environment and tag, both are validated and will return a response, prod requires "yes" confirmation
+4) Log parser script: simple script that will print occurences of WARN, INFO and ERROR lines in a log file 
+5) Hello script: It had to be done :)
